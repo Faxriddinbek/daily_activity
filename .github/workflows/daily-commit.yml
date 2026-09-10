@@ -2,10 +2,11 @@ name: Daily Auto Commit
 
 on:
   schedule:
-    - cron: '0 4 * * *'   # Toshkent 09:00
-    - cron: '0 8 * * *'   # Toshkent 13:00
-    - cron: '0 12 * * *'  # Toshkent 17:00
-    - cron: '0 16 * * *'  # Toshkent 21:00
+    - cron: '0 3 * * *'   # 08:00
+    - cron: '0 6 * * *'   # 11:00
+    - cron: '0 9 * * *'   # 14:00
+    - cron: '0 12 * * *'  # 17:00
+    - cron: '0 15 * * *'  # 20:00
   workflow_dispatch:
 
 jobs:
@@ -17,13 +18,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Update log file
-        run: |
-          echo "Update: $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> activity.log
+        run: echo "Update: $(date -u '+%Y-%m-%d %H:%M:%S') UTC" >> activity.log
 
       - name: Commit and push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Faxriddinbek"
+          git config user.email "IDRAQAM+Faxriddinbek@users.noreply.github.com"
           git add activity.log
-          git commit -m "chore: daily update" || echo "Nothing to commit"
+          git commit -m "chore: daily update"
+          git pull --rebase
           git push
